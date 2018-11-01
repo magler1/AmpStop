@@ -13,6 +13,7 @@ instructions to generate both can be found in the SI Note). By running three R f
 within minutes generate a list of all possible blocking oligos, a figure showing how many times each 
 oligo “hits” target templates (fewer hits indicates higher specificity for non-targets) and a ranked 
 list of the most promising blocking oligo pairs.
+URL: http://github.com/magler1/AmpStop
 Imports:
   dplyr,
   tidyr
