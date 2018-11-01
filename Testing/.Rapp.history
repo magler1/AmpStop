@@ -1,0 +1,176 @@
+library(phyloseq)
+install.package('phyloseq')
+install.packages('phyloseq')
+install.packages('phyloseq', repos='https://ftp.gwdg.de/pub/misc/cran/')
+source("https://bioconductor.org/biocLite.R")
+biocLite("phyloseq")
+system('defaults write org.R-project.R force.LANG en_US.UTF-8')
+biocLite("phyloseq")
+source("https://bioconductor.org/biocLite.R")
+biocLite("phyloseq")
+library('vegan')
+source("https://bioconductor.org/biocLite.R")#
+biocLite()
+biocLite("phyloseq")
+library(“phyloseq”)
+library(phyloseq)
+install.packages("data.table")
+library(phyloseq)
+biocLite(“genefilter”)
+biocLite("genefilter")
+library(genefilter)
+library(dada2)
+biocLite("dada2")
+library(dada2)
+?basename
+?sapply
+path <- "/Volumes/Movable\ Dri/NewLabStuff/Teaching/Praktikum/2018/BiodiversityWorkshop/RhizosphereData/SplitFiles/"
+list.files(path)
+fnFs <- sort(list.files(path, pattern="Lane1_TechComparison_R1", full.names=TRUE))
+fnRs <- sort(list.files(path, pattern="Lane1_TechComparison_R2", full.names=TRUE))
+fnFs
+sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 5)
+sample.names
+sapply(strsplit(sample.names, "."), `[`, 1:5)
+strsplit(sample.names, ".")
+basename(fnFs)
+strsplit(sample.names, "\.")
+strsplit(sample.names, "\\.")
+sapply(strsplit(sample.names, "\\."), `[`, 1:5)
+sapply(strsplit(sample.names, "\\."), `[`, -6)
+sample.names <- sapply(strsplit(sample.names, "\\."), `[`, -6)
+sample.names
+sample.names <- sapply(strsplit(basename(fnFs), "_"), `[`, 5)
+sample.names
+file_path_sans_ext(sample.names[1])
+library(tools)
+file_path_sans_ext(sample.names[1])
+file_path_sans_ext(sample.names)
+sample.names <- file_path_sans_ext(sample.names)
+plotQualityProfile(fnFs[1:2])
+plotQualityProfile(fnRs[1:2])
+filtFs <- file.path(path, "filtered", paste0(sample.names, "_F_filt.fastq.gz"))
+filtRs <- file.path(path, "filtered", paste0(sample.names, "_R_filt.fastq.gz"))
+out <- filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,175),#
+              maxN=0, maxEE=c(2,2), truncQ=2, rm.phix=TRUE,#
+              compress=TRUE, multithread=FALSE)
+head(out)
+fastafilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta")#
+fastafile <- read.table(file="fastafilename")
+fastafilename <- "/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta"#
+fastafile <- read.table(file="fastafilename")
+fastafilename
+fastafilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta")#
+fastafile <- read.table(file=fastafilename)
+fastafilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta")#
+fastafile <- read.table(file=fastafilename, sep="")
+?read.table
+?read.file
+??read fasta
+install.packages(ShortRead)
+install.packages("ShortRead")
+fastafilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta")#
+fastafile <- readLines(file=fastafilename)
+?readLines
+fastafilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_new_wholelength.fasta")#
+fastafile <- readLines(fastafilename)
+fastafile
+?writeLines
+?substring
+?seq
+length(fastafile[2])
+nachar(fastafile[2])
+nchar(fastafile[2])
+length(fastafile)
+# Set the length of the kmers to return#
+n <- 30#
+#
+outputfilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_Candidate_kmers.fasta")#
+fileConn<-file(outputfilename)#
+for(i in 1:nchar(fastafile[2])){#
+	kmer <- substring(fastafile[2], i, i+n)#
+	writeLines(c(paste(">kmer_",i), kmer), fileConn)	#
+}#
+close(fileConn)#
+#
+# done
+# Set the length of the kmers to return#
+n <- 30#
+#
+outputfilename <- c("/Volumes/Movable\ Dri/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Testing/Athaliana_ITS1_Candidate_kmers.fasta")#
+for(i in 1:nchar(fastafile[2])-n){#
+	header <- paste(">kmer_",i)#
+	kmer <- substring(fastafile[2], i, i+n)#
+	q <- i + i-1#
+	fastaoutput[q] <- header#
+	fastaoutput[q+1] <- kmer#
+}#
+fileConn<-file(outputfilename)#
+writeLines(fastaoutput, fileConn)#
+close(fileConn)#
+#
+# done
+fastaoutput#
+for(i in 1:nchar(fastafile[2])-n){#
+	header <- paste(">kmer_",i)#
+	kmer <- substring(fastafile[2], i, i+n)#
+	q <- i + i-1#
+	fastaoutput[q] <- header#
+	fastaoutput[q+1] <- kmer#
+}
+class(fastafile)
+fastaoutput <- c()#
+for(i in 1:nchar(fastafile[2])-n){#
+	header <- paste(">kmer_",i)#
+	kmer <- substring(fastafile[2], i, i+n)#
+	q <- i + i-1#
+	fastaoutput[q] <- header#
+	fastaoutput[q+1] <- kmer#
+}#
+fileConn<-file(outputfilename)#
+writeLines(fastaoutput, fileConn)#
+close(fileConn)
+source("https://bioconductor.org/biocLite.R")
+biocLite(Biostrings)
+biocLite("Biostrings")
+install_github("mhahsler/rBLAST")
+biocLite("rBLAST")
+install.packages("adegenet")
+data("microbov", package = "adegenet")
+microbov
+head(microbov)
+library(dplyr)#
+x <- read.table(textConnection('Ship_No     Number     #
+    1244         1#
+    1244         2#
+    1244         3#
+    1244         1#
+    1245         10#
+    1245         10#
+    1245         15#
+    1245         20#
+    1245         20'), header = TRUE)
+x
+x %>% group_by(Ship_No)
+x %>% group_by(Ship_No) %>%#
+    filter(duplicated(Number))
+x %>% group_by(Ship_No) %>%#
+    duplicated(Number)
+x
+x %>% group_by(Ship_No) %>% duplicated(Number)
+x %>% group_by(Ship_No) %>% filter(duplicated(Number))
+unique(x)
+setwd("/Volumes/Seagate/NewLabStuff/Research/MPIPZ/KemenLab/MethodsPaper/RPackageDesign_OligoBlock/Package/")
+install("BlockingOligos")
+install.packages("BlockingOligos")
+install.packages("./BlockingOligos")
+install.packages("BlockingOligos", lib="./")
+??install
+library(BlockingOligos)
+setwd("./BlockingOligos/Testing/")
+?get_candidate_oligos
+get_candidate_oligos(nontarget="Athaliana_ITS1_new_wholelength.fasta")
+blast_candidate_oligos(blastn_path="/Users/imacuser/ncbi-blast-2.7.1+/bin/blastn", blastdb="./Unite_s_011217/UNITE_s_011217", candidates="Candidate_oligos.fasta")
+?blast_candidate_oligos
+?check_candidate_oligos
+check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
