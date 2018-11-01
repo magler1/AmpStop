@@ -14,6 +14,7 @@ within minutes generate a list of all possible blocking oligos, a figure showing
 oligo “hits” target templates (fewer hits indicates higher specificity for non-targets) and a ranked 
 list of the most promising blocking oligo pairs.
 URL: http://github.com/magler1/AmpStop
+BugReports: http://github.com/hadley/magler1/AmpStop/issues
 Imports:
   dplyr,
   tidyr
