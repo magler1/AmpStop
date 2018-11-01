@@ -5,13 +5,16 @@
 
 # Installation:
 
+```
 devtools::install_github("magler1/AmpStop")
 library(AmpStop)
+```
 
 # Running:
 
 First, download the folder "Testing", then:
 
+```
 setwd("Path/to/Testing/")
 
 ?get_candidate_oligos
@@ -22,3 +25,4 @@ blast_candidate_oligos(blastn_path="/Path/to/blastn", blastdb="./Unite_s_011217/
 
 ?check_candidate_oligos
 check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
+```
