@@ -12,15 +12,23 @@
 #' @examples
 #' blast_candidate_oligos(blastdb="./Unite_s_011217/UNITE_s_011217")
 
+OS <- Sys.info()['sysname']
 
 blast_candidate_oligos <- function(blastn_path = "blastn", blastdb, candidates, outfile="Candidate_vs_UNITE.out"){
 
-	# create blast command function. The parameters are currently not adjustable 
-	cmd <- paste(blastn_path, " -db ", blastdb ," -query ", candidates ," -out ", outfile," -outfmt \"7 nident std\" -perc_identity 50 -word_size 12 -dust no -evalue 1000 -max_target_seqs 1000 ", sep = "")
-	paste("Running Blast command: ",cmd, sep = "")
+	# create blast command function. The parameters are currently not adjustable, but will be printed
+  cmd <- paste(blastn_path, " -db ", blastdb ," -query ", candidates ," -out ", outfile," -outfmt \"7 nident std\" -perc_identity 50 -word_size 12 -dust no -evalue 1000 -max_target_seqs 1000 ", sep = "")
+  paste("Running Blast command: ",cmd, sep = "")
 
-	#Run the command
-	sapply(cmd, system)
+  # Run the blast command. This is OS-specific
+  if(OS=="Darwin" || OS=="Linux"){
+	  #Run the command
+	  sapply(cmd, system)
+  }
+
+  if(OS=="Windows"){
+    #Run the command
+    shell(cmd)
+  }
+
 }
-	
-
