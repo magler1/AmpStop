@@ -23,6 +23,8 @@ get_candidate_oligos(nontarget="Athaliana_ITS1_new_wholelength.fasta")
 ?blast_candidate_oligos
 blast_candidate_oligos(blastn_path="/Path/to/blastn", blastdb="./Unite_s_011217/UNITE_s_011217", candidates="Candidate_oligos.fasta")
 
+Note: in Windows, blastn_path will looks something like "C:\\path\\to\\blastn.exe"
+
 ?check_candidate_oligos
 check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
 ```
