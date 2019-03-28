@@ -16,37 +16,37 @@
 #' check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
 
 check_candidate_oligos <- function(candidates, blastoutput, outputgraph="Oligos_Plot.pdf", outputfile="OligoPairs_Table.txt"){
-	
+
 	# Get the query file into a data frame
 	kmers <- grep('kmer', readLines(candidates), value=T)
 	seqs <- grep('kmer', readLines(candidates), value=T, invert=T)
 	kmers <-as.data.frame(kmers)
 	seqs <- as.data.frame(seqs)
 	kmers <- cbind(kmers,seqs)
-	
+
 	# Grep the blast result and return the number of hits, put in dataframe
 	grepreturn <- grep('hits found', readLines(blastoutput), value=T)
 	df <- as.data.frame(grepreturn)
 	df2 <- separate(df, grepreturn, c("hash", "numhits", "hits", "found"), " ")
-	
+
 	numcandidates <- length(row.names(df2))
 	minhits <- min(as.numeric(df2$numhits))
 	maxhits <- max(as.numeric(df2$numhits))
-	
-	# Now, check all primer pair sets with left primer between 1/6 to 1/3 of non-target length and right primer between 2/3 to 5/6 of non-target length
-	OnesixthL <- floor((1/6) * numcandidates)
+
+	# Now, check all primer pair sets with left primer between 0 to 1/3 of non-target length and right primer between 2/3 to end of non-target length
+	#OnesixthL <- floor((1/6) * numcandidates)
 	OnethirdL <- floor((1/3) * numcandidates)
 	TwothirdL <- floor((2/3) * numcandidates)
-	FiveSixthsL <- floor((5/6) * numcandidates)
-	
+	#FiveSixthsL <- floor((5/6) * numcandidates)
+
 	primerpairs <- setNames(data.frame(matrix(ncol = 7, nrow = 0)), c("Left", "Right", "LeftSeq","RightSeq","HitsLeft", "HitsRight", "HitsTotal"))
-	
-	for(j in OnesixthL: OnethirdL){
-		for(i in TwothirdL: FiveSixthsL){
-			
-			newline <- c(j, i, 	as.character(kmers$seqs[which(kmers$kmers==paste(">kmer_",j,sep=""))]),as.character(kmers$seqs[which(kmers$kmers==paste(">kmer_",i,sep=""))]), as.numeric(df2$numhits)[j], as.numeric(df2$numhits)[i], as.numeric(df2$numhits)[j] + as.numeric(df2$numhits)[i])	
+
+	for(j in 1: OnethirdL){
+		for(i in TwothirdL: numcandidates){
+
+			newline <- c(j, i, 	as.character(kmers$seqs[which(kmers$kmers==paste(">kmer_",j,sep=""))]),as.character(kmers$seqs[which(kmers$kmers==paste(">kmer_",i,sep=""))]), as.numeric(df2$numhits)[j], as.numeric(df2$numhits)[i], as.numeric(df2$numhits)[j] + as.numeric(df2$numhits)[i])
 			primerpairs[nrow(primerpairs) + 1,] <- newline
-	
+
 		}
 	}
 
@@ -58,5 +58,5 @@ check_candidate_oligos <- function(candidates, blastoutput, outputgraph="Oligos_
 	pdf(file= outputgraph)
 	plot(row.names(df2), df2$numhits, xlab = c("Candidate blocking oligo position on non-target sequence"), ylab=c("Number of hits to target database"))
 	dev.off()
-	
+
 }
