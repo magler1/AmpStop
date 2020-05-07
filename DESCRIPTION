@@ -1,18 +1,19 @@
 Package: AmpStop
 Title: Quickly and easily design oligos to block nontarget amplification in amplicon sequencing projects.
-Version: 0.0.9
+Version: 1.0.0
 Authors@R: 
     person(given = "Matthew",
            family = "Agler",
            role = c("aut", "cre"),
            email = "matthew.agler@uni-jena.de")
-Description: “AmpStop”, an “R” package to automate design of blocking oligos. AmpStop can be used by anyone with R and BLAST+ installed on their computer. It requires as input only the nontarget, amplified region and a target sequence database that is BLAST-formatted (an example can be found in the folder "Testing"). By running three R functions, users can within minutes generate a list of all possible blocking oligos, a figure showing how many times each oligo “hits” target templates (fewer hits indicates higher specificity for non-targets) and a ranked list of the most promising blocking oligo pairs.
+Description: “AmpStop”, an “R” package to automate design of blocking oligos. AmpStop can be used by anyone with R and BLAST+ installed on their computer. It requires as input only the nontarget, amplified region and a target sequence database that is BLAST-formatted (an example can be found in the folder "Testing"). By running three R functions, users can within minutes generate a list of all possible blocking oligos, a figure showing how many times each oligo “hits” target templates (fewer hits indicates higher specificity for non-targets) and a list of all oligo sequences with stats.
 URL: http://github.com/magler1/AmpStop
 BugReports: http://github.com/hadley/magler1/AmpStop/issues
 Imports:
-  dplyr,
-  tidyr
+  ggpubr,
+  tidyr,
+  ggplot2
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 7.0.1

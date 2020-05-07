@@ -3,5 +3,6 @@
 export(blast_candidate_oligos)
 export(check_candidate_oligos)
 export(get_candidate_oligos)
-import(dplyr)
+import(ggplot2)
+import(ggpubr)
 import(tidyr)
