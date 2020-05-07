@@ -4,8 +4,11 @@
 \alias{get_candidate_oligos}
 \title{Get Candidate Oligomers}
 \usage{
-get_candidate_oligos(nontarget, length = 30,
-  outfile = "Candidate_oligos.fasta")
+get_candidate_oligos(
+  nontarget,
+  length = 30,
+  outfile = "Candidate_oligos.fasta"
+)
 }
 \arguments{
 \item{nontarget}{Filepath for the non-target DNA sequence. No Default}

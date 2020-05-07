@@ -4,8 +4,12 @@
 \alias{check_candidate_oligos}
 \title{Check Oligomers and Potential Primer Pairs}
 \usage{
-check_candidate_oligos(candidates, blastoutput,
-  outputgraph = "Oligos_Plot.pdf", outputfile = "OligoPairs_Table.txt")
+check_candidate_oligos(
+  candidates,
+  blastoutput,
+  outputgraph = "Oligos_Plot.pdf",
+  outputfile = "OligoPairs_Table.txt"
+)
 }
 \arguments{
 \item{candidates}{Filepath for the candidate oligomers file. No Default.}
@@ -17,7 +21,7 @@ check_candidate_oligos(candidates, blastoutput,
 \item{outputfile}{Filepath for the output table, which will check pairs of oligos and sort them by the minimum total number of times they hit target sequences. Defaults to "OligoPairs_Table.txt".}
 }
 \description{
-This function takes output from get_candidate_oligos() and blast_candidate_oligos(). It checks each candidate for how many times it hit the target organisms, then sorts potential pairs to minimize the number of hits. The pairs in the output table can then be manually checked for ideal primer characteristics, etc.
+This function takes output from get_candidate_oligos() and blast_candidate_oligos(). It checks each candidate for how many times they hits the target organisms (in the example fungi in the Unite ITS database), how many times the hits align along >90% of the length of the primer, and how many hits align at the 3' end of the primer (alignments are counted if they end within 3 bases of the end of hte primer. This type of alignment is the most serious since the polymerase binds there). It outputs a graph (in pdf format) with each of the three counts as well as the same data with the primer sequences in a tab-delimited table. Good candidates can be checked subsequently for the ideal primer characteristics, etc.
 }
 \examples{
 check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")

@@ -4,8 +4,14 @@
 \alias{blast_candidate_oligos}
 \title{Blast Candidate Oligomers}
 \usage{
-blast_candidate_oligos(blastn_path = "blastn", blastdb, candidates,
-  outfile = "Candidate_vs_UNITE.out")
+blast_candidate_oligos(
+  blastn_path = "blastn",
+  blastdb,
+  candidates,
+  outfile = "Candidate_vs_UNITE.out",
+  percid = 25,
+  wordsize = 7
+)
 }
 \arguments{
 \item{blastn_path}{Path to blastn. Defaults to "blastn". If your blast copy is somewhere else, please point to it here.}
@@ -15,9 +21,13 @@ blast_candidate_oligos(blastn_path = "blastn", blastdb, candidates,
 \item{candidates}{Filepath for the candidate oligomers file. No Default.}
 
 \item{outfile}{Filepath for the output file name, which will contain the blast results. Defaults to "Candidates_vs_UNITE.out"}
+
+\item{percid}{Minimum percent identity to use for the blast search (default is 25)}
+
+\item{wordsize}{Word size to use in the blast search (default is 7)}
 }
 \description{
-This function will blast candidate oligomers (from a nontarget organism) against a database of target organisms and returns a parsable format.
+This function will blast candidate oligomers (from a nontarget organism) against a database of target organisms and return a parsable format. The default parameters are set to identify quite poor alignments with the goal of identifying as well as possible any potential matches.
 }
 \examples{
 blast_candidate_oligos(blastdb="./Unite_s_011217/UNITE_s_011217")
