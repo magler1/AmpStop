@@ -59,7 +59,7 @@ The final script parses the blast results and outputs a summary of hit results f
 check_candidate_oligos(candidates="Candidate_oligos.fasta", blastoutput="Candidate_vs_UNITE.out")
 ```
 Example graphical output:
-(Coming soon...)
+![Example Output Figure](https://github.com/magler1/AmpStop/blob/master/Testing/Oligos_Plot.pdf)
 
 Note that the blue and red dotted lines signify 1/3 and 2/3 of the length of the whole non-target sequence. A left and right primer may be best found outside these two lines.
 
